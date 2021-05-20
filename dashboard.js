@@ -30,7 +30,7 @@ const dashBoard = {
           <td>${item.category}</td>
           <td>${item.origin_price}</td>
           <td>${item.price}</td>
-          <td >${item.is_enabled ? '啟用' : '未啟用'}</td>
+          <td><span class="${item.is_enabled ? 'text-success' : 'text-danger'}">${item.is_enabled ? '啟用' : '未啟用'}</span></td>
           <td><button type="button" data-id="${item.id}" class="del btn btn-outline-danger">刪除</button></td>
         </tr>
       
