@@ -5,7 +5,11 @@ const dashBoard = {
     data: {
       products: [],
     },
-     
+    logOut() {
+      axios.post(`${url}/logout`).then(res => {
+          window.location.assign('./index.html');                
+      })
+    },
     getData() {
       axios.get(`${url}/api/${path}/admin/products`)
         .then(res => {
@@ -17,7 +21,7 @@ const dashBoard = {
           }
         })
     },
-    
+  
     render() {
       const productListDom = document.querySelector('#productList');
       const productCountDom=document.querySelector('#productCount');
@@ -43,6 +47,9 @@ const dashBoard = {
         //bind參照星期二直播,但其實不知道使用時機
         btn.addEventListener('click', this.deleteProduct.bind(this));
       })
+      //監聽登出按鈕
+      const logOutBtn = document.querySelector('#logOut')
+      logOutBtn.addEventListener('click',dashBoard.logOut);
     },
     
     deleteProduct(e) {
@@ -59,7 +66,7 @@ const dashBoard = {
 
     created() {
       // 取Cookie
-      const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)yoyoToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
       axios.defaults.headers.common['Authorization'] = token;
 
       this.getData();

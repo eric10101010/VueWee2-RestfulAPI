@@ -1,11 +1,11 @@
 const form = document.querySelector('#form');
 const username = document.querySelector('#username');
 const password = document.querySelector('#password');
-const api = 'https://vue3-course-api.hexschool.io'
+const url = 'https://vue3-course-api.hexschool.io'
 
 function login (e) {
     e.preventDefault();
-    const url = `${api}/admin/signin`;
+    const url = `${url}/admin/signin`;
     const user = {
         username: username.value,
         password: password.value,
@@ -15,6 +15,7 @@ function login (e) {
     axios.post(url, user).then((res) => {
         if (res.data.success) {
             const { token, expired } = res.data;
+            //存取cookie於broswer
             document.cookie = `yoyoToken = ${token}; expires = ${new Date(expired)}; path=/`;
             window.location = './vueweek2.html';
         } else {
